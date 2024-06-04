@@ -11,11 +11,27 @@ export const AuthProvider = ({ children }) => {
     const [nickname, setNickname] = useState('');
     const [memberId, setMemberId] = useState('');
     const [accessToken, setAccessToken] = useState('');
+    
 
 
     
+      
+        // 쿠키에서 accessToken 가져오는 함수
+        const getAccessTokenFromCookie = () => {
+          const cookies = document.cookie.split(';');
+          const cookie = cookies.find(cookie => cookie.trim().startsWith('accessToken='));
+          if (cookie) {
+            return cookie.split('=')[1];
+          } else {
+            return null;
+          }
+        };
+      
+        
+    
     useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
+        
+        const accessToken = getAccessTokenFromCookie();
         setIsLoggedIn(!!accessToken);
         const userIdFromStorage = localStorage.getItem('platform');
         setUserId(userIdFromStorage || '');
@@ -54,6 +70,7 @@ export const AuthProvider = ({ children }) => {
                 
             });
             localStorage.removeItem('accessToken')
+            setAccessToken(null);
             setIsLoggedIn(false);
             console.log('Logout successful.');
         } catch (error) {
