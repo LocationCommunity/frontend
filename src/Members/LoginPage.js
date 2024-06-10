@@ -122,6 +122,11 @@ const LoginPage = () => {
             로그인
           </button>
         </form>
+        <div>
+          <button onClick={() => navigate("/members/sign-up")} className="sign-up">
+            회원가입
+          </button>
+        </div>
         <div id="naverIdLogin" />
         <br />
         <div id="kakaoIdLogin" />

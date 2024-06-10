@@ -1,23 +1,45 @@
-/* ChatRoomDetail.css */
-
 .chat-room-detail {
+  font-family: "Jua", sans-serif;
   width: 100%;
-  max-width: 800px;
+  max-width: 350px;
   margin: 0 auto;
   padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 73px;
+  margin-bottom: 73px;
 }
 
 .chat-room-detail__header {
-  text-align: center;
   margin-bottom: 20px;
+  text-align: center;
+}
+
+.chat-room-detail__header h1 {
+  font-size: 24px;
+  color: #333;
 }
 
 .chat-room-detail__info {
   margin-bottom: 20px;
 }
 
+.chat-room-detail__info p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+}
+
 .chat-room-detail__messages {
   margin-bottom: 20px;
+}
+
+.chat-room-detail__messages h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .chat-room-detail__messages ul {
@@ -26,45 +48,72 @@
 }
 
 .chat-room-detail__messages .message {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  padding: 10px;
   margin-bottom: 10px;
-}
-
-.chat-room-detail__input {
-  display: flex;
-  align-items: center;
-}
-
-.chat-room-detail__input input {
-  flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.chat-room-detail__input button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.chat-room-detail__input button:hover {
-  background-color: #0056b3;
-}
-
-.sent-message {
-  background-color: #DCF8C6;
+.chat-room-detail__messages .sent-message {
+  background-color: #e1ffc7;
+  align-self: flex-end;
   text-align: right;
 }
 
-.received-message {
-  background-color: #ECEFF1;
+.chat-room-detail__messages .received-message {
+  background-color: #f1f0f0;
+  align-self: flex-start;
   text-align: left;
 }
 
+.chat-room-detail__input {
+  max-width: 330px;
+}
+
+.chat-room-detail__messages .message__text {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.chat-room-detail__messages .message__time {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #999;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .chat-room-detail {
+    padding: 10px;
+  }
+
+  .chat-room-detail__header h1 {
+    font-size: 20px;
+  }
+
+  .chat-room-detail__info p {
+    font-size: 14px;
+  }
+
+  .chat-room-detail__messages h2 {
+    font-size: 18px;
+  }
+
+  .chat-room-detail__messages .message {
+    padding: 8px;
+  }
+
+  .chat-room-detail__messages .message__text {
+    font-size: 14px;
+  }
+
+  .chat-room-detail__messages .message__time {
+    font-size: 10px;
+  }
+
+  .message__received {
+    text-align: left;
+  }
+}

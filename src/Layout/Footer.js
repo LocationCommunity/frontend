@@ -16,7 +16,7 @@ const Footer = () => {
     <footer className="footer">
       <button onClick={() => navigateTo('/')}><GoHome size={25}/></button>
       <button onClick={() => navigateTo('/map')}><FaMap size={25}/></button>
-      <button onClick={() => navigateTo('/about')}>About</button>
+      <button onClick={() => navigateTo('/place/list')}>Search</button>
     </footer>
   );
 };

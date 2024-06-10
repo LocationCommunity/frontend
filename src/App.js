@@ -21,13 +21,23 @@ import MyInfoUpdate from './Members/MyInfoUpdate';
 import BoardsUpdate from './Boards/BoardsUpdate';
 import NaverCallback from "./Members/NaverCallback";
 import KakaoCallback from "./Members/KakaoCallback";
+import SignUp from './Members/SignUp';
 
 const App = () => {
+
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  });
+
   return (
     <AuthProvider>
-      <header>
-        <Nav />
-      </header>
+        <header>
+          <Nav/>
+        </header>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,6 +47,7 @@ const App = () => {
           <Route path="/boards" element={<BoardWrite />} />
           <Route path="/boards/:boardId" element={<Boards />} /> Route 안에서는
           element prop을 사용합니다.
+          <Route path="/members/sign-up" element={<SignUp />} />
           <Route path="/members/login" element={<LoginPage />} />
           <Route path="/members/login/naver" element={<NaverCallback />} />
           <Route path="/members/login/kakao" element={<KakaoCallback />} />

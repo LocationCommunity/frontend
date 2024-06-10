@@ -7,6 +7,7 @@ import { AuthContext } from '../Context/AuthContext';
 function MyChatRoomList() {
     const { memberId } = useContext(AuthContext);
     const [chatRooms, setChatRooms] = useState([]);
+    const [unreadMessageCount, setUnreadMessageCount] = useState(0);
     const [error, setError] = useState(null);
 
     
@@ -19,6 +20,7 @@ function MyChatRoomList() {
                         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
                     }
                 });
+                setUnreadMessageCount(response.data.data.unread);
                 setChatRooms(response.data.data);
                 console.log(response.data.data);
             } catch (error) {
@@ -37,7 +39,7 @@ function MyChatRoomList() {
                 {chatRooms.map(room => (
                     <li key={room.id} className="chat-room-item">
                         <Link to={`/chat/room/${room.id}`} state={{ roomId: room.id }}>
-                            {room.matchedMember2.nickname} : 님과의 채팅방
+                            {room.matchedMember2.nickname} : 님과의 채팅방 {room.unread}
                         </Link>
                     </li>
                 ))}
