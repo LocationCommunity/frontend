@@ -57,21 +57,25 @@ const LoginPage = () => {
   useEffect(() => {
     const clientId = '_HS3A2uGvmapJz7j8E1s';
     const state = 'STATE_STRING';
-    const redirectUri = 'http://localhost:8080/members/login/naver';
+    const redirectUri = 'http://localhost:3000';
     const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&state=${state}&redirect_uri=${redirectUri}`;
     
     const naverLoginButton = document.createElement('a');
     naverLoginButton.href = naverAuthUrl;
-    naverLoginButton.innerHTML = '<img src="https://static.nid.naver.com/oauth/small_g_in.PNG" alt="네이버 로그인" style="width: 150px; height: auto;" />';
+    naverLoginButton.innerHTML = '<img src="https://static.nid.naver.com/oauth/small_g_in.PNG" alt="네이버 로그인" style="width: 80px; height: auto;" />';
     document.getElementById('naverIdLogin').appendChild(naverLoginButton);
   }, []);
 
+  const handleNaverLogin = () => {
+    // 네이버 로그인 URL로 리다이렉트
+    window.location.href = '네이버 로그인 URL';
+  };
+
   return (
-    <><div>
-      <button onClick={() => navigate("/")} className="back-button">
-        <IoIosArrowBack size={10} />
-      </button>
-    </div><div className="login-page">
+    
+      <><button onClick={() => navigate("/")} className="back-button">
+      <IoIosArrowBack size={10} />
+    </button><div className="login-page">
         <img src={logo} alt="easytrip" className="logo" />
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleLogin}>
@@ -100,8 +104,14 @@ const LoginPage = () => {
           </div>
           <button type="submit" className={isEmailValid && isPasswordValid ? 'active' : ''} disabled={!isEmailValid || !isPasswordValid}>로그인</button>
         </form>
+        <div>
+          <button onClick={() => navigate("/members/sign-up")} className="sign-up">
+            회원가입
+          </button>
+        </div>
         <div id="naverIdLogin" />
-      </div></>
+      </div>
+      </>
   );
 };
 

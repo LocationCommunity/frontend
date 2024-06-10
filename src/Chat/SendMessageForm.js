@@ -35,7 +35,7 @@ function SendMessageForm({ roomId, memberId, nickname, roomDetail, onNewMessage 
 
   const sendMessage = () => {
     const receiverId = roomDetail.matchedMember1.id !== memberId ? roomDetail.matchedMember1.id : roomDetail.matchedMember2.id;
-    const userNickname = roomDetail.matchedMember1.nickname !== nickname ? roomDetail.matchedMember1.nickname : roomDetail.matchedMember2.nickname;
+    const userNickname = roomDetail.matchedMember1.nickname !== nickname ? roomDetail.matchedMember2.nickname : roomDetail.matchedMember1.nickname;
     const message = {
       message: newMessage,
       senderId: memberId,

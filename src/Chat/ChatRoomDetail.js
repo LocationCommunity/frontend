@@ -7,6 +7,7 @@ import SendMessageForm from './SendMessageForm';
 
 function ChatRoomDetail() {
   const [roomDetail, setRoomDetail] = useState(null);
+  const [unreadMessageCount, setUnreadMessageCount] = useState(0);
   const [error, setError] = useState(null);
   const { memberId, nickname } = useContext(AuthContext);
   const location = useLocation();
@@ -27,6 +28,7 @@ function ChatRoomDetail() {
             Authorization: `Bearer ${accessToken}`
           }
         });
+        setUnreadMessageCount(response.data.data.unread);
         setRoomDetail(response.data.data);
       
       } catch (error) {
@@ -61,6 +63,7 @@ function ChatRoomDetail() {
         <p>Room ID: {roomDetail.id}</p>
         <p>Matched Member 1: {roomDetail.matchedMember1.nickname}</p>
         <p>Matched Member 2: {roomDetail.matchedMember2.nickname}</p>
+        <p>Unread Messages: {unreadMessageCount}</p>
       </div>
       <div className="chat-room-detail__messages">
         <h2>Messages</h2>
@@ -75,10 +78,12 @@ function ChatRoomDetail() {
             const dateObject = new Date(sendTime);
             const hours = dateObject.getHours().toString().padStart(2, '0');
             const minutes = dateObject.getMinutes().toString().padStart(2, '0');
-            const formattedSendTime = `${hours}:${minutes}`;
+            
+
+            const formattedSendTime = `${hours}:${minutes}`
             return (
               <li key={index} className={`message ${senderId === memberId ? 'sent-message' : 'received-message'}`}>
-                <p className="message__text"> {nickname} {messageText}</p>
+                <p className="message__text"> {senderId === memberId ? '' : `${nickname} `}{messageText} </p>
                 <p className="message__time">{formattedSendTime}</p>
               </li>
             );

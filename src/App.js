@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {  Route, Routes } from 'react-router-dom';
 import Footer from './Layout/Footer';
 import Home from './Home/Home';
@@ -20,13 +20,27 @@ import PlaceList from './Place/PlaceList';
 import PlaceInfo from './Place/PlaceInfo';
 import MyInfoUpdate from './Members/MyInfoUpdate';
 import BoardsUpdate from './Boards/BoardsUpdate';
+import SignUp from './Members/SignUp';
+
+
 
 
 
 const App = () => {
+
+  function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }
+  useEffect(() => {
+    setScreenSize();
+  });
+
   return (
     <AuthProvider>
-        <header><Nav/></header>
+        <header>
+          <Nav/>
+        </header>
       <div className="App">
         <Routes>
         <Route path="/" element={<Home />} />
@@ -35,6 +49,7 @@ const App = () => {
           <Route path="/boards/lists" element={<BoardsList />} />
           <Route path="/boards" element={<BoardWrite />} />
           <Route path="/boards/:boardId" element={<Boards />} /> Route 안에서는 element prop을 사용합니다.
+          <Route path="/members/sign-up" element={<SignUp />} />
           <Route path="/members/login" element={<LoginPage/>} />
           <Route path="/members/my-info" element={<MyInfo/>} />
           <Route path="/chat/room/list" element={<MyChatRoomList/>} />
