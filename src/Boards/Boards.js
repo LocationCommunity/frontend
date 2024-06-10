@@ -3,6 +3,7 @@ import axios from "axios";
 import {  useParams, useNavigate } from "react-router-dom";
 import { FaThumbsUp } from "react-icons/fa";
 import './Boards.css';
+import BoardsUpdate from  './BoardsUpdate';
 
 
 function Boards() {
@@ -10,6 +11,7 @@ function Boards() {
     const { boardId } = useParams();
     const navigate = useNavigate();
     const [isLiked, setIsLiked] = useState(false);
+    const [isEditVisible, setIsEditVisible] = useState(false);
 
     // 쿠키에서 accessToken 가져오는 함수
     const getAccessTokenFromCookie = () => {
@@ -83,9 +85,17 @@ function Boards() {
         });
     };
 
+    const handleEditClick = () => {
+        setIsEditVisible(true);
+    };
+
+    const handleEditClose = () => {
+        setIsEditVisible(false);
+    };
+
     return (
         
-            <div className="App">
+        <div className="App">
                 <div className="image-container">
                     {boards.images && boards.images.map((image, index) => (
                         <img key={index} src={`/images/${image}`} alt={`게시판 이미지 ${index + 1}`} />
@@ -108,8 +118,12 @@ function Boards() {
                             <p>
                                 장소 : <button onClick={handlePlaceInfoClick}>장소상세보기</button>
                             </p>
+                            {localStorage.getItem('accessToken') && boards.userId === JSON.parse(atob(localStorage.getItem('accessToken').split('.')[1])).userId && (
+                                <button onClick={handleEditClick}>수정</button>
+                            )}
                         </div>
                         <button onClick={handleBackClick}> 게시물 목록 </button>
+                        {isEditVisible && <BoardsUpdate boardId={boardId} initialData={boards} onClose={handleEditClose} />}
                     </div>
                 ) : (
                     <p className="loading"> 게시물 불러오는 중... </p>
