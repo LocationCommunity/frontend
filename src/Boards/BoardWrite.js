@@ -4,17 +4,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './BoardWrite.css';
 
+const PlaceCategory = {
+  CAFE: "CAFE",
+  RESTAURANT: "RESTAURANT",
+  BAR: "BAR",
+  MUSEUM: "MUSEUM",
+  SHOPPING: "SHOPPING",
+  PARK: "PARK",
+  ENTERTAINMENT: "ENTERTAINMENT"
+};
+
 function BoardWrite() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
     files: [],
     placeId: "",
+    state: "",
+    PlaceCategory: PlaceCategory.RESTAURANT,
   });
 
   const [places, setPlaces] = useState([]);
+  const [filteredPlaces, setFilteredPlaces] = useState([]); // 필터된 장소 목록을 따로 관리
+  const [selectedCategory, setSelectedCategory] = useState(PlaceCategory.RESTAURANT);
 
-  // 쿠키에서 accessToken 가져오는 함수
   const getAccessTokenFromCookie = () => {
     const cookies = document.cookie.split(';');
     const cookie = cookies.find(cookie => cookie.trim().startsWith('accessToken='));
@@ -25,15 +38,16 @@ function BoardWrite() {
     }
   };
 
-  const accessToken = getAccessTokenFromCookie(); // 쿠키에서 accessToken 가져오기
+  const accessToken = getAccessTokenFromCookie();
   console.log(accessToken)
+
   useEffect(() => {
     async function fetchPlaces() {
       try {
         const response = await axios.get("/place/list", {
           params: {
-            state: "부천",
-            PlaceCategory: "RESTAURANT",
+            state: formData.state,
+            PlaceCategory: selectedCategory,
           },
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -41,13 +55,14 @@ function BoardWrite() {
         });
         console.log("장소 목록:", response.data);
         setPlaces(response.data);
+        setFilteredPlaces(response.data); // 초기 목록 설정
       } catch (error) {
         console.error("장소 목록을 불러오는 중 에러 발생:", error);
       }
     }
 
     fetchPlaces();
-  }, [accessToken]);
+  }, [formData.state, selectedCategory, accessToken]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +70,12 @@ function BoardWrite() {
       ...formData,
       [name]: value,
     });
+
+    // 장소 필터링
+    const filtered = places.filter(place =>
+      place.placeName.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredPlaces(filtered);
   };
 
   const handleFileChange = (e) => {
@@ -125,6 +146,34 @@ function BoardWrite() {
           />
         </div>
         <div>
+          <label htmlFor="state">지역으로 검색</label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="PlaceCategory">카테고리 선택:</label>
+          <select
+            id="PlaceCategory"
+            name="PlaceCategory"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            required
+          >
+            <option value={PlaceCategory.CAFE}>카페</option>
+            <option value={PlaceCategory.RESTAURANT}>음식점</option>
+            <option value={PlaceCategory.BAR}>술집</option>
+            <option value={PlaceCategory.MUSEUM}>박물관</option>
+            <option value={PlaceCategory.SHOPPING}>쇼핑</option>
+            <option value={PlaceCategory.PARK}>공원</option>
+            <option value={PlaceCategory.ENTERTAINMENT}>오락시설</option>
+          </select>
+        </div>
+        <div>
           <label htmlFor="placeId">장소 선택:</label>
           <select
             id="placeId"
@@ -134,7 +183,7 @@ function BoardWrite() {
             required
           >
             <option key="" value="">장소를 선택하세요</option>
-            {places.map((place) => (
+            {filteredPlaces.map((place) => ( // 필터링된 목록을 사용
               <option key={place.placeId} value={place.placeId}>
                 {place.placeName}
               </option>
@@ -148,6 +197,3 @@ function BoardWrite() {
 }
 
 export default BoardWrite;
-
-
-

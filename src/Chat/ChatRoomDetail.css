@@ -1,41 +1,70 @@
+/* ChatRoomDetail.css */
+
 .chat-room-detail {
-  /* 컨테이너 스타일 */
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .chat-room-detail__header {
-  /* 헤더 스타일 */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .chat-room-detail__info {
-  /* 채팅방 정보 스타일 */
+  margin-bottom: 20px;
 }
 
 .chat-room-detail__messages {
-  /* 메시지 목록 스타일 */
+  margin-bottom: 20px;
 }
 
-.message {
-  /* 메시지 아이템 스타일 */
+.chat-room-detail__messages ul {
+  list-style: none;
+  padding: 0;
 }
 
-.message__text {
-  /* 메시지 텍스트 스타일 */
-}
-
-.message__time {
-  /* 메시지 시간 스타일 */
+.chat-room-detail__messages .message {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .chat-room-detail__input {
   display: flex;
-  margin-top: 20px;
+  align-items: center;
 }
 
 .chat-room-detail__input input {
   flex: 1;
   padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
 .chat-room-detail__input button {
-  padding: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
+
+.chat-room-detail__input button:hover {
+  background-color: #0056b3;
+}
+
+.sent-message {
+  background-color: #DCF8C6;
+  text-align: right;
+}
+
+.received-message {
+  background-color: #ECEFF1;
+  text-align: left;
+}
+
