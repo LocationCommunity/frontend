@@ -76,7 +76,7 @@ const LoginPage = () => {
     kakaoLoginButton.innerHTML =
       '<img src="https://developers.kakao.com/assets/img/about/logos/kakaologin/kr/kakao_account_login_btn_large_narrow.png" alt="카카오 로그인" style="width: 150px; height: auto;" />';
     document.getElementById("kakaoIdLogin").appendChild(kakaoLoginButton);
-  });
+  }, []);
 
   return (
     <>
@@ -123,7 +123,10 @@ const LoginPage = () => {
           </button>
         </form>
         <div>
-          <button onClick={() => navigate("/members/sign-up")} className="sign-up">
+          <button
+            onClick={() => navigate("/members/sign-up")}
+            className="sign-up"
+          >
             회원가입
           </button>
         </div>

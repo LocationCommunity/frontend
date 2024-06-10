@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Layout/Footer";
 import Home from "./Home/Home";
@@ -17,26 +17,26 @@ import Nav from "./Layout/Nav";
 import PlaceList from "./Place/PlaceList";
 import PlaceInfo from "./Place/PlaceInfo";
 import MyInfoUpdate from "./Members/MyInfoUpdate";
-import BoardsUpdate from './Boards/BoardsUpdate';
+import BoardsUpdate from "./Boards/BoardsUpdate";
 import NaverCallback from "./Members/NaverCallback";
 import KakaoCallback from "./Members/KakaoCallback";
-import SignUp from './Members/SignUp';
+import SignUp from "./Members/SignUp";
 
 const App = () => {
-
   function setScreenSize() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }
+
   useEffect(() => {
     setScreenSize();
   });
 
   return (
     <AuthProvider>
-        <header>
-          <Nav/>
-        </header>
+      <header>
+        <Nav />
+      </header>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
