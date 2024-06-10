@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode"; // JWT 디코딩 라이브러리 추가
 
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {

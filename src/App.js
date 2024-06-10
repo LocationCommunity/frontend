@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Layout/Footer";
 import Home from "./Home/Home";
@@ -17,7 +17,6 @@ import Nav from "./Layout/Nav";
 import PlaceList from "./Place/PlaceList";
 import PlaceInfo from "./Place/PlaceInfo";
 import MyInfoUpdate from "./Members/MyInfoUpdate";
-import MyInfoUpdate from './Members/MyInfoUpdate';
 import BoardsUpdate from './Boards/BoardsUpdate';
 import NaverCallback from "./Members/NaverCallback";
 import KakaoCallback from "./Members/KakaoCallback";

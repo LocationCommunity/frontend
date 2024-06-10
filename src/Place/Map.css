@@ -1,6 +1,5 @@
 /* 전체 앱의 기본 스타일 */
 .App2 {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;

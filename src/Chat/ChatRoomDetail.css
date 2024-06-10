@@ -112,8 +112,5 @@
   .chat-room-detail__messages .message__time {
     font-size: 10px;
   }
-
-  .message__received {
-    text-align: left;
-  }
+  
 }
