@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; // useHistory 대신 useNavigate 사용
 import axios from "axios";
 
-const NaverCallback = () => {
+const KakaoCallback = () => {
   const location = useLocation();
   const navigate = useNavigate(); // useNavigate 사용
 
@@ -10,7 +10,7 @@ const NaverCallback = () => {
     const code = new URLSearchParams(location.search).get("code");
     if (code) {
       axios
-        .get(`/members/login/naver?code=${code}`)
+        .get(`/members/login/kakao?code=${code}`)
         .then((response) => {
           const { accessToken } = response.data;
           localStorage.setItem("accessToken", accessToken);
@@ -18,12 +18,12 @@ const NaverCallback = () => {
           window.location.href = "/";
         })
         .catch((error) => {
-          console.error("네이버 로그인 실패:", error);
+          console.error("카카오 로그인 실패:", error);
         });
     }
   }, [location, navigate]); // navigate 추가
 
-  return <div>네이버 로그인 중...</div>;
+  return <div>카카오 로그인 중...</div>;
 };
 
-export default NaverCallback;
+export default KakaoCallback;
